@@ -14,10 +14,11 @@ public	class MainDate{
 			System.out.println("mes en el que estas "+today.getMonth());
 			System.out.println("dias que quedan	"+today.DayLeftOfMonth());
 			System.out.println("Meses que quedan	"+today.MonthsLeft());
-			System.out.println("Meses qcon mismos dias	"+today.MonthsWhitSameDays());
+			System.out.println("Meses qcon mismos dias	"+today.MonthsWithSameDays());
 			System.out.println("Dias que han pasado desde el principio del año	"+today.DaysPastOfYear());
-			System.out.println("Intentos para la misma fecha	"+today.RandomTriesForEqualDate());
 			System.out.println("en que estacion estamos 	"+today.getSeasonName());
+			System.out.println("Dia de la semana	"+today.DayOfWeek());
+			System.out.println("intentos para la fecha	"+today.RandomTriesForEqualDate2());
 		} catch (DateException e) {
 			System.out.println(e.getMessage());
 		}
