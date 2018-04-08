@@ -1,5 +1,3 @@
-
-
 public	class Date {
 		private int day, month, year;
 		public Date(int day,int month,int year)throws DateException{
@@ -28,47 +26,65 @@ public	class Date {
 			}
 		}
 		
-		int getYear(){
+		public int getYear(){
 			return this.year;
 		}
 		
-		int getMonth(){
+		public int getMonth(){
 			return this.month;
 		}
 
-		int getDay(){
+		public int getDay(){
 			return this.day;
 		}
 		
 		
 		//VER SI LOS AÑOS SON IGUALES
-		boolean isSameYear(Date aDate){
+		public boolean isSameYear(Date aDate){
 			if(this.year==aDate.getYear()){
 				return true;
 			}
 		return false;
 		}
+		public boolean isSameYearNoIf(Date aDate){
+			return this.year==aDate.getYear()?true:false;
+		}
 
 		//VER SI LOS MESES SON IGUALES
-		boolean isSameMonth(Date aDate){
+		public boolean isSameMonth(Date aDate){
 			if(this.month==aDate.getMonth()){
 				return true;
 			}
 		return false;
 		}
+		
+
+		public boolean isSameMonthNoIf(Date aDate){
+			return this.month==aDate.getMonth()?true:false;
+		}
 
 		//VER SI LOS DIAS SON IGUALES
-		boolean isSameDay(Date aDate){
+		public boolean isSameDay(Date aDate){
 			if(this.day==aDate.getDay()){
 				return true;
 			}
 		return false;
 		}
-		//COMPARA FECHA ENTERA
-		boolean isSame (Date aDate){
-		return this.isSameDay(aDate) && this.isSameMonth(aDate) && this.isSameYear(aDate);
-		}
 
+		public boolean isSameDayNoIf(Date aDate){
+			return this.day==aDate.getDay()?true:false;
+		}
+		//COMPARA FECHA ENTERA
+		public boolean isSame (Date aDate){
+			if(this.isSameDay(aDate) && this.isSameMonth(aDate) && this.isSameYear(aDate)){
+				return true;
+			}
+		return false;
+		}
+		
+		public boolean isSameNoIf(Date aDate){
+			return (this.isSameDay(aDate) && this.isSameMonth(aDate) && this.isSameYear(aDate))?true:false;
+		}
 		//IMPRIME EL NOMBRE DEL MES
 		String getMonthName(){
 			String name;
@@ -116,7 +132,7 @@ public	class Date {
 		}
 
 		//COMPRUEBA SI EL DIA PERTENECE AL MES
-		boolean isDayOfMonthOk(){
+		public boolean isDayOfMonthOk(){
 			boolean ok;
 			ok = false;
 			switch(this.month){
@@ -149,7 +165,7 @@ public	class Date {
 		}
 		
 		//NUMERO DE DIAS DEL MES
-		int DayOfMonth(){
+		public int DayOfMonth(){
 			int num_day;
 			num_day=0;
 			switch(this.month){
@@ -176,7 +192,7 @@ public	class Date {
 		}
 
 		//ME DICE LOS MESES QUE QUEDAN
-		String MonthsLeft()throws DateException{
+		public String MonthsLeft()throws DateException{
 			StringBuilder monthsleft;
 			monthsleft=new StringBuilder();
 			Date auxiliar;
@@ -191,7 +207,7 @@ public	class Date {
 		}
 
 		//FECHAS HASTA FIN DE MES
-		String DayLeftOfMonth()throws DateException{
+		public String DayLeftOfMonth()throws DateException{
 			StringBuilder daysleft;
 			daysleft=new StringBuilder();
 			Date auxiliar;
@@ -207,15 +223,15 @@ public	class Date {
 		}
 
 		//MESES CON LOS MISMOS DIAS
-		String MonthsWithSameDays()throws DateException{
+		public String MonthsWithSameDays()throws DateException{
 			StringBuilder month;
 			month =new StringBuilder();
 			Date auxiliar;
 			auxiliar=new Date(this.day,this.month,this.year);
 				for ( int i = 1; i <= 12; i++) {
 					auxiliar.month=i;
-				if ((auxiliar.DayOfMonth() == this.DayOfMonth()) && (auxiliar.month!=this.month)) {
-					month.append(auxiliar.getMonthName() + "\n");
+				if ((auxiliar.DayOfMonth() == this.DayOfMonth()) && (auxiliar.month!=this.month)){
+					month.append(auxiliar.getMonthName()+"\n");
 				}
 				}
 		return month.toString();
@@ -227,7 +243,7 @@ public	class Date {
 		}
 
 		//dia desde inicio del año
-		int DaysPastOfYear()throws DateException{
+		public int DaysPastOfYear()throws DateException{
 			int resultado;
 			resultado=0;
 			Date auxiliar;
@@ -241,7 +257,7 @@ public	class Date {
 
 
 		//INTENTOS PARA ACERTAR LA FECHA
-		int RandomTriesForEqualDate()throws DateException{
+		public int RandomTriesForEqualDateDoWhile()throws DateException{
 			int intentos,d,m,y;
 			intentos=0;
 			do{
@@ -254,24 +270,23 @@ public	class Date {
 			
 		return intentos;
 		}
-		int RandomTriesForEqualDate2()throws DateException{
-			int intentos,d,m,y;
+		public int RandomTriesForEqualDateWhile(){
+			int intentos,d,m;
 			intentos=0;
-			d=1;
-			m=1;
-			y= this.year
-			while(!this.isSame(new Date(d,m,y))){
+			boolean caso=false;
+			while(caso==false){
 				m= (int)(Math.random()*12) +1;
 				d= (int)(Math.random()*this.DayOfMonth()) +1;
 				intentos++;
-					
+				if(m==this.month && d==this.day){
+					caso=true;
+				}	
 			}
-			
-			
 		return intentos ;
 		}
+
 		//DICE LA ESTACION DEL AÑO
-		String getSeasonName(){
+		public String getSeasonName(){
 		String estacion = null;
 		switch (this.month){
 		case 1: 
@@ -323,7 +338,7 @@ public	class Date {
 	}
 		
 		//QUE DIA DE LA SEMANA ES
-		String DayOfWeek()throws DateException{
+		public String DayOfWeek()throws DateException{
 			String name_dia = null;
 			int num_dia;
 			Date auxiliar;
@@ -354,10 +369,6 @@ public	class Date {
 			}
 		return name_dia;
 		}
-
-
-
-
 }
 	
 	
