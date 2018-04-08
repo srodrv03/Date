@@ -1,11 +1,9 @@
 <?xml version="1.0"?>
 
-<project name="Tipos basicos y operadores" basedir="." default="todo">
+<project name="Class Date" basedir="." default="todo">
     <property name="src" value="src"/>
     <property name="classes" value="classes"/>
     <property name="conf" value="etc"/>
-
-    <property name="paquetes" value="es.unileon"/>
 
     <target name="clean">
       <delete dir="${classes}"/>
@@ -13,19 +11,18 @@
 
     <target name="compile" depends="clean">
       <mkdir dir="${classes}"/>
-      <mkdir dir="${conf}"/>
       <javac includeantruntime="false" srcdir="${src}" destdir="${classes}"/>
       <echo message="Compiling...done"/>
     </target>
 
     <target name="run" depends="compile">
-      <java classname="es.unileon">
+      <java classname="MainDate">
          <classpath>
               <pathelement path="${classes}"/>
          </classpath>
       </java>
     </target>
 
-    <target name="todo" depends="compile, run"/>
+    <target name="todo" depends="run"/>
 
 </project>
